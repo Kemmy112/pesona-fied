@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    background-image: url('https://img.freepik.com/premium-vector/abstract-light-blue-background_165578-1885.jpg?ga=GA1.1.149383177.1734934021&semt=ais_hybrid&w=740');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.forgotext{
+    font-size: 13px;
+}
+
+.signuptext{
+    font-size: 14px;
+    margin-left: 20%;
+}
+
+/* Base layout */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: #f8f9fa; */
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Form card appearance */
+.wrapper form {
+  width: 100%;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 30px;
+  backdrop-filter: blur()10px;
+  -webkit-backdrop-filter: blur;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+}
+
+/* Form header */
+.form-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.titles {
+  display: flex;
+  position: absolute;
+  top: 6%;
+  align-items: center;
+  gap: 5px;
+}
+
+
+.title-login,
+.title-register {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: #6c757d;
+  padding: 10px 20px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.title-login.active,
+.title-register.active {
+  color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Input icon style */
+.position-relative i.bx {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-top: 3%;
+}
+
+/* Transitions for toggle effect */
+.login-form,
+.register-form {
+  animation: fadeSlide 0.4s ease forwards;
+}
+
+@keyframes fadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth link hover */
+a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.btn-primary, .btn-success{
+    background-color: #368bc1 !important;
+    border-color: #368bc1 !important;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .wrapper form {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .titles {
+    /* flex-direction: column; */
+    gap: 10px;
+  }
+}
