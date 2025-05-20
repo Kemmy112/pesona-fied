@@ -5,14 +5,189 @@
 }
 
 body {
-  background: linear-gradient(135deg, #2a0845, #6441a5);
-  height: 100vh;
-  margin: 0;
   font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-  color: white;
+  color: #ffffff;
+  overflow-x: hidden;
+  background-color: black;
 }
-.overlay {
+
+
+/* for homepage */
+/* Container for the whole homepage */
+.homepage-container {
+  min-height: 100vh;
+}
+
+
+/* Wrapper for all the page content */
+.content-wrapper {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+}
+
+/* Hero section */
+.hero {
+  margin-top: 16%;
+  user-select: none;
+}
+
+.jingle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  color: white;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.concept {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+}
+
+/* CTA buttons side by side */
+.cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.cta-buttons button {
+  background-color: #00adff;
+  border: none;
+  border-radius: 30px;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.1rem;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(97, 223, 255, 0.5);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-buttons button:hover,
+.cta-buttons button:focus {
+  background-color: #5080e6;
+  outline: none;
+  transform: scale(1.05);
+}
+
+/* Teaser words section with spaced paragraphs */
+.teaser-text {
+  margin-top: 16%;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  user-select: none;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.teaser-text p {
+  margin: 0.4rem 0;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Concept Scroll section */
+.concept-scroll .reveal {
+   margin-top: 12%;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #fff;
+  text-shadow: 0 1px 7px rgba(0, 0, 0, 0.6);
+}
+
+/* Persona cards container */
+.persona-mocks {
+  margin-top: 6%;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+/* Individual persona card styling */
+.persona-card {
+  background-color: #00adff;
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  width: 200px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255, 111, 97, 0.3);
+  backdrop-filter: blur(8px);
+  user-select: none;
+  cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.persona-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(255, 111, 97, 0.6);
+}
+
+.lit{
+  border: 1px solid white;
+  width: 170px;
+  margin-left: -11%;
+  border-radius: 5px;
+}
+
+/* Footer CTA */
+.footer-cta {
+  color: #fff;
+  
+}
+
+.footer-cta button:hover,
+.footer-cta button:focus {
+  background-color: #00adff;
+  outline: none;
+  transform: scale(1.1);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .jingle {
+    font-size: 2rem;
+  }
+
+  .concept-scroll {
+    max-width: 100%;
+  }
+
+  .persona-mocks {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  .cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* width: 210px; */
+  justify-content: center;
+  margin-top: 5%;
+}
+
+}
+
+/* For the forms  */
+/* .overlay {
   backdrop-filter: blur(10px);
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -20,10 +195,12 @@ body {
   max-width: 600px;
   margin: 5rem auto;
   text-align: center;
-}
+  outline: 2px solid red;
+} */
 
 .forgotext{
     font-size: 13px;
+     outline: 2px solid red;
 }
 
 .signuptext{
@@ -37,7 +214,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background: #f8f9fa; */
+  background-color: #000;
+  color: #fff;
   padding: 20px;
   transition: all 0.3s ease;
 }
@@ -126,33 +304,7 @@ a:hover {
     border-color: #368bc1 !important;
 }
 
-/* for homepage */
-.gradient-bg {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(150deg, #d7f0f7, #b57edc); /* lavender to ice blue */
-  z-index: -2;
-}
-
-.vanta-layer {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.content-wrapper {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  top: 30vh;
-  color: white;
-}
-
-
-
-/* Responsive */
+/* Responsive layout */
 @media (max-width: 500px) {
   .wrapper form {
     padding: 20px;
