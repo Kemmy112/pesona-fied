@@ -186,17 +186,37 @@ body {
 
 }
 
+/* The About page*/
+
+/* Enhance modal glow and moodiness */
+.about-glow {
+  box-shadow: 0 0 40px rgba(132, 197, 255, 0.1), 0 0 15px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Make sure scrollable modals feel smooth */
+.modal-dialog-scrollable .modal-body {
+  scrollbar-width: thin;
+  scrollbar-color: #666 #222;
+}
+
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar-track {
+  background: #222;
+}
+
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 10px;
+}
+
+
 /* For the forms  */
-/* .overlay {
-  backdrop-filter: blur(10px);
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
-  padding: 2rem;
-  max-width: 600px;
-  margin: 5rem auto;
-  text-align: center;
-  outline: 2px solid red;
-} */
+
 
 .forgotext{
     font-size: 13px;
@@ -224,6 +244,7 @@ body {
 .wrapper form {
   width: 100%;
   max-width: 400px;
+  margin-top: 3%;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   padding: 30px;
@@ -257,6 +278,12 @@ body {
   padding: 10px 20px;
   border-bottom: 2px solid transparent;
   transition: all 0.3s ease-in-out;
+}
+
+.title-register{
+  /* margin-left: 76%; */
+  margin-top: -25%;
+  /* outline: 2px solid red; */
 }
 
 .title-login.active,

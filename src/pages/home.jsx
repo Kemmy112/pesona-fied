@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import '../styles/global.css';
-import Navbar from '../components/layout/navbar';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +19,7 @@ export default function HomePage() {
         backgroundRepeat: 'no-repeat',
       }}>
       
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="content-wrapper">
         {/* Hero Section */}
