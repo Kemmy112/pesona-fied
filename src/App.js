@@ -10,9 +10,15 @@ import About from './pages/about';
 import Dashboard from "./pages/dashboard";
 import ProtectedRoute from "./components/protectedRoutes";
 
+
+
 function App() {
+
+  
   return (
     <Router>
+         <About />
+
       <Routes>
 
         {/* ✅ Homepage with Navbar */}
@@ -43,8 +49,9 @@ function App() {
         />
         
       </Routes>
-    </Router>
-  );
-}
+    </Router>)
+};
+
+
 
 export default App;
