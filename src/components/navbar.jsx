@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/global.css';
+import '../styles/global.css';
 import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
@@ -25,7 +25,7 @@ function Navbar() {
           display: "inline-block",
         }}
       >
-        PersonaFied
+        Personafied
       </span>
     </a>
 
@@ -46,7 +46,7 @@ function Navbar() {
     <div className="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
       <div className="navbar-nav gap-3">
         <a className="nav-link fs-6" href="/about">About</a>
-        <a className="nav-link fs-6" onClick={() => navigate('/login')}>Login</a>
+        <a className="nav-link fs-6" href ="/login">Login</a>
       </div>
     </div>
   </div>

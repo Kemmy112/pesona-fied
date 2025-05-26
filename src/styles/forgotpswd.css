@@ -1,0 +1,18 @@
+.forgot-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  /* color: #fff; */
+  padding: 1rem;
+}
+
+.forgot-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
