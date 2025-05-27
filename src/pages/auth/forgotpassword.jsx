@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { auth } from "../firebase/config";
-import { sendEmailVerification } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase/config";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { motion } from 'framer-motion';
 import { 
-  HiOutlineMail, 
+  HiOutlineLockClosed,
   HiOutlineArrowRight,
   HiOutlineRefresh,
   HiOutlineSun,
   HiOutlineMoon,
-  HiOutlineCheck
+  HiOutlineMail
 } from 'react-icons/hi';
 
-function VerifyEmail() {
-  const location = useLocation();
+function forgotpassword() {
   const navigate = useNavigate();
-  const [email] = useState(location.state?.email || "");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [resendDisabled, setResendDisabled] = useState(false);
-  const [countdown, setCountdown] = useState(0);
 
   useEffect(() => {
     const isDark = localStorage.getItem('darkMode') === 'true';
@@ -31,18 +28,6 @@ function VerifyEmail() {
     }
   }, []);
 
-  useEffect(() => {
-    let timer;
-    if (countdown > 0) {
-      timer = setInterval(() => {
-        setCountdown((prev) => prev - 1);
-      }, 1000);
-    } else {
-      setResendDisabled(false);
-    }
-    return () => clearInterval(timer);
-  }, [countdown]);
-
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
@@ -50,34 +35,16 @@ function VerifyEmail() {
     document.documentElement.classList.toggle('dark');
   };
 
-  const handleResendVerification = async () => {
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
     setLoading(true);
     setError("");
     try {
-      const user = auth.currentUser;
-      if (user) {
-        await sendEmailVerification(user);
-        setSuccess(true);
-        setResendDisabled(true);
-        setCountdown(60); // 60 seconds cooldown
-      } else {
-        setError("No user found. Please sign in again.");
-      }
+      await sendPasswordResetEmail(auth, email);
+      setSuccess(true);
     } catch (error) {
-      console.error("Error sending verification email:", error);
-      let errorMessage = "Failed to send verification email";
-      
-      switch (error.code) {
-        case 'auth/too-many-requests':
-          errorMessage = "Too many attempts. Please try again later.";
-          break;
-        case 'auth/network-request-failed':
-          errorMessage = "Network error. Please check your connection.";
-          break;
-        default:
-          errorMessage = error.message;
-      }
-      setError(errorMessage);
+      console.error("Error sending password reset email:", error);
+      setError(error.message);
     }
     setLoading(false);
   };
@@ -109,13 +76,13 @@ function VerifyEmail() {
             transition={{ delay: 0.2 }}
             className="inline-block mb-3"
           >
-            <HiOutlineMail className="w-10 h-10 text-blue-500 dark:text-blue-400" />
+            <HiOutlineLockClosed className="w-10 h-10 text-blue-500 dark:text-blue-400" />
           </motion.div>
           <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
-            Verify Your Email
+            Reset Password
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">
-            Check your inbox for the verification link
+            Enter your email to receive a reset link
           </p>
         </div>
 
@@ -126,22 +93,24 @@ function VerifyEmail() {
           transition={{ delay: 0.3 }}
           className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-8 shadow-lg"
         >
-          <div className="space-y-6">
-            {/* Email Display */}
-            <div className="text-center">
-              <p className="text-gray-600 dark:text-gray-300 text-sm">
-                Please check your email at:
-              </p>
-              <p className="text-blue-600 dark:text-blue-400 font-medium mt-1 text-sm">
-                {email}
-              </p>
-            </div>
-
-            {/* Instructions */}
-            <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4">
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                Click the verification link in the email to activate your account. If you don't see the email, check your spam folder.
-              </p>
+          <form onSubmit={handleResetPassword} className="space-y-6">
+            {/* Email Input */}
+            <div className="relative">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Email Address
+              </label>
+              <div className="relative">
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 pl-12 bg-transparent border-b-2 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 outline-none transition-colors text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                  placeholder="Enter your email"
+                />
+                <HiOutlineMail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              </div>
             </div>
 
             {/* Error Message */}
@@ -160,19 +129,18 @@ function VerifyEmail() {
               <motion.p 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-green-500 text-sm text-center flex items-center justify-center space-x-1"
+                className="text-green-500 text-sm text-center"
               >
-                <HiOutlineCheck className="w-4 h-4" />
-                <span>Verification email sent successfully!</span>
+                Password reset email sent! Check your inbox.
               </motion.p>
             )}
 
-            {/* Resend Button */}
+            {/* Submit Button */}
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={handleResendVerification}
-              disabled={loading || resendDisabled}
+              type="submit"
+              disabled={loading}
               className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 rounded-lg flex items-center justify-center space-x-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
@@ -180,13 +148,9 @@ function VerifyEmail() {
                   <HiOutlineRefresh className="w-5 h-5 animate-spin" />
                   <span>Sending...</span>
                 </>
-              ) : resendDisabled ? (
-                <>
-                  <span>Resend in {countdown}s</span>
-                </>
               ) : (
                 <>
-                  <span>Resend Verification Email</span>
+                  <span>Send Reset Link</span>
                   <HiOutlineArrowRight className="w-5 h-5" />
                 </>
               )}
@@ -195,20 +159,18 @@ function VerifyEmail() {
             {/* Back to Login */}
             <div className="text-center text-sm text-gray-600 dark:text-gray-400">
               <button
+                type="button"
                 onClick={() => navigate("/login")}
-                disabled={loading}
-                className="text-blue-600 dark:text-blue-400 hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+                className="text-blue-600 dark:text-blue-400 hover:underline"
               >
                 Back to Login
               </button>
             </div>
-          </div>
+          </form>
         </motion.div>
       </motion.div>
     </div>
   );
 }
 
-export default VerifyEmail;
-
-
+export default forgotpassword; 

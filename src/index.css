@@ -1,0 +1,29 @@
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  
+  body {
+    @apply bg-primary text-secondary;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-full transition-all duration-200 font-medium;
+  }
+  
+  .btn-primary {
+    @apply bg-accent hover:bg-accent-dark text-white;
+  }
+  
+  .btn-secondary {
+    @apply border border-secondary/20 hover:border-secondary/40 text-secondary;
+  }
+} 

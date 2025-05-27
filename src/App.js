@@ -8,6 +8,7 @@ import Navbar from "./components/navbar";
 import ForgotPassword from "./components/forgotpassword";
 import About from './pages/about';
 import Dashboard from "./pages/dashboard";
+import CreatePersona from "./pages/create-persona";
 import ProtectedRoute from "./components/protectedRoutes";
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
         <Route path ="/about" element={<About/>} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
-        {/* ✅ Protected Dashboard */}
+        {/* ✅ Protected Routes */}
         <Route
           path="/dashboard"
           element={
@@ -42,8 +43,17 @@ function App() {
           }
         />
         
+        <Route
+          path="/create-persona"
+          element={
+            <ProtectedRoute>
+              <CreatePersona />
+            </ProtectedRoute>
+          }
+        />
+        
       </Routes>
     </Router>)
+}
 
-};
 export default App;
