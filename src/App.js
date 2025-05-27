@@ -5,7 +5,7 @@ import Login from "./pages/auth/login";
 import Signup from './pages/auth/signup';
 import VerifyEmail from "./pages/verifyemail";
 import Navbar from "./components/navbar";
-import ForgotPassword from "./components/forgotpassword";
+import ForgotPassword from "./pages/auth/forgotpassword";
 import About from './pages/about';
 import Dashboard from "./pages/dashboard";
 import CreatePersona from "./pages/create-persona";

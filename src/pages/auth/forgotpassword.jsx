@@ -12,7 +12,7 @@ import {
   HiOutlineMail
 } from 'react-icons/hi';
 
-function forgotpassword() {
+function ForgotPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -173,4 +173,4 @@ function forgotpassword() {
   );
 }
 
-export default forgotpassword; 
+export default ForgotPassword; 

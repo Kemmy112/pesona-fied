@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase/config";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { handleGoogleSignIn } from "../../utils/authUtils";
 import { motion } from 'framer-motion';
 import { 
@@ -47,7 +48,7 @@ function Login() {
 
   const handleForgotPassword = (e) => {
     e.preventDefault();
-    navigate("/forgotpassword");
+    navigate("/forgot-password");
   };
 
   const onGoogleClick = async () => {
@@ -94,11 +95,36 @@ function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       
+      
+      await user.reload();
+
       if (!user.emailVerified) {
-        await auth.signOut();
-        setError("Please verify your email before logging in.");
-        return;
+      await auth.signOut();
+      setError("Please verify your email before logging in.");
+      setLoading(false);
+      return;
       }
+
+      const userDocRef = doc(db, "users", user.uid);
+const userDocSnap = await getDoc(userDocRef);
+
+if (userDocSnap.exists()) {
+  await updateDoc(userDocRef, {
+    emailVerified: true,
+  });
+} else {
+  await setDoc(userDocRef, {
+    email: user.email,
+    emailVerified: true,
+    createdAt: new Date(),
+  });
+}
+
+    // Manually update emailVerified in Firestore
+    // await updateDoc(doc(db, "users", user.uid), {
+    // emailVerified: true,
+    // });
+
       
       navigate("/dashboard");
     } catch (error) {
